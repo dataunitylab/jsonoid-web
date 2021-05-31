@@ -9,6 +9,8 @@ ThisBuild / githubRepository  := "jsonoid-web"
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
+Compile / herokuAppName := "jsonoid"
+
 lazy val root = (project in file("."))
   .settings(
     name := "JSONoid Web",

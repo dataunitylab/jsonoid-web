@@ -1,6 +1,7 @@
 addSbtPlugin("au.com.onegeek" % "sbt-dotenv" % "2.1.204")
 addSbtPlugin("com.codecommit" % "sbt-github-packages" % "0.5.2")
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.15.0")
+addSbtPlugin("com.heroku" % "sbt-heroku" % "2.1.4")
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.8.8")
 addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "1.0.0")
 addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.4.1")
