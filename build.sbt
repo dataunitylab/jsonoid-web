@@ -20,6 +20,7 @@ lazy val root = (project in file("."))
 
         scalaTest % Test,
     ),
+    watchSources ++= (baseDirectory.value / "public/ui" ** "*").get,
     scalacOptions ++= Seq(
       "-feature",
       "-Xfatal-warnings",

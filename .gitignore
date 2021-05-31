@@ -1,5 +1,6 @@
 .bsp/
 .metals/
 logs/
+/public/
 target/
 .env

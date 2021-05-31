@@ -32,7 +32,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: olafurpg/setup-scala@v10
-    - name: Publish package
+    - name: Deploy on Heroku
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
