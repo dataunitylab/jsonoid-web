@@ -17,6 +17,7 @@ lazy val root = (project in file("."))
     resolvers += Resolver.githubPackages("michaelmior"),
     libraryDependencies ++= Seq(
         guice,
+        jsonoid,
 
         scalaTest % Test,
     ),
@@ -38,7 +39,6 @@ wartremoverErrors ++= Seq(
   Wart.NonUnitStatements,
   Wart.Null,
   Wart.Option2Iterable,
-  Wart.OptionPartial,
   Wart.PublicInference,
   Wart.Recursion,
   Wart.Return,

@@ -5,5 +5,8 @@
 # Serve index page from public directory
 GET     /                           controllers.FrontendController.index()
 
+# API routes
+POST    /api/discover-schema          controllers.DiscoveryController.discover
+
 # Serve static assets under public directory
 GET     /*file                      controllers.FrontendController.assetOrDefault(file)
