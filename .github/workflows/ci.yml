@@ -18,7 +18,7 @@ jobs:
       run: sbt scalastyle
     - name: Test
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
       run: sbt coverage test coverageReport
     - name: Upload coverage
       uses: codecov/codecov-action@v1
@@ -34,6 +34,6 @@ jobs:
     - uses: olafurpg/setup-scala@v10
     - name: Deploy on Heroku
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: sbt stage deployHeroku
