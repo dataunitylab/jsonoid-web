@@ -6,6 +6,7 @@
 GET     /                           controllers.FrontendController.index()
 
 # API routes
++ nocsrf
 POST    /api/discover-schema          controllers.DiscoveryController.discover
 
 # Serve static assets under public directory
