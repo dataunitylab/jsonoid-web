@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { useSelector } from 'react-redux';
+
+import Schema from './Schema';
+import SchemaInput from './SchemaInput';
+
 import './App.css';
 
 function App() {
+  const schema = useSelector((state) => state.schema.schema);
+
+  let schemaDisplay;
+  if (schema) {
+    schemaDisplay = <Schema schema={schema} />;
+  } else {
+    schemaDisplay = <SchemaInput />;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {schemaDisplay}
     </div>
   );
 }

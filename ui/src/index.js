@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+import { ClientContextProvider } from 'react-fetching-library';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store from './store';
+import client from './client';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <ClientContextProvider client={client}>
+        <App />
+      </ClientContextProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
