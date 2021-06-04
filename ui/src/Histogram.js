@@ -3,11 +3,11 @@ import LineGraph from 'react-line-graph';
 
 function Histogram({data}) {
   const [value, setValue] = useState('');
-  data.sort((a, b) => b[0] - a[0]);
+  const sortedData = [...data].sort((a, b) => b[0] - a[0]);
   return <div>
     {value}
     <LineGraph
-      data={data}
+      data={sortedData}
       smoothing={1}
       hover={true}
       accent={'palevioletred'}

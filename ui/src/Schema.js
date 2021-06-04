@@ -94,11 +94,11 @@ function showMeta(schema, namespace) {
 
   let examples;
   if (meta.examples) {
-    meta.examples.sort();
+    const sortedExamples = [...meta.examples].sort();
     examples = <div>
       <h2>Samples</h2>
       <div style={{maxHeight: '200px', overflow: 'scroll'}}>
-        {meta.examples.map((sample, index) => <div key={index}>{sample}</div>)}
+        {sortedExamples.map((sample, index) => <div key={index}>{sample}</div>)}
       </div>
     </div>;
   }
