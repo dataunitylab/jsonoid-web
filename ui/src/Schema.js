@@ -80,12 +80,14 @@ function showMeta(schema, namespace) {
     fieldPresence = <div>
       <h2>Object Key Presence</h2>
       <table cellPadding={10}>
-        {Object.keys(meta.fieldPresence).sort((k1, k2) => meta.fieldPresence[k2] - meta.fieldPresence[k1]).map(key =>
-          <tr key={key}>
-            <td>{key}</td>
-            <td>{(meta.fieldPresence[key] * 100).toFixed(2)}%</td>
-          </tr>
-        )}
+        <tbody>
+          {Object.keys(meta.fieldPresence).sort((k1, k2) => meta.fieldPresence[k2] - meta.fieldPresence[k1]).map(key =>
+            <tr key={key}>
+              <td>{key}</td>
+              <td>{(meta.fieldPresence[key] * 100).toFixed(2)}%</td>
+            </tr>
+          )}
+        </tbody>
       </table>
     </div>;
   }
