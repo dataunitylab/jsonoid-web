@@ -17,6 +17,10 @@ function App() {
 
   return (
     <div className="App">
+      <header>
+        <img src="/logo.png" alt="jsonoid" />
+        <span>JSON schema inference</span>
+      </header>
       {schemaDisplay}
     </div>
   );

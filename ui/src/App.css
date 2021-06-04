@@ -1,1 +1,12 @@
 html, body, #root, .App { height: 100% }
+
+.App header {
+  padding: 1em;
+  font-size: 1.25em;
+}
+
+.App header img {
+  max-height: 2em;
+  vertical-align: middle;
+  margin-right: 2em;
+}

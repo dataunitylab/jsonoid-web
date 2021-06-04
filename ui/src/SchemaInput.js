@@ -20,6 +20,7 @@ function SchemaInput() {
 
   return (
     <div className='SchemaInput'>
+      <div>Enter a collection of JSON documents (one per line):</div>
       <textarea disabled={loading} value={json} onChange={e => setJson(e.target.value)} />
         <button disabled={loading} onClick={async () => {
           const {error: mutationError, payload: schema} = await mutate(json);
