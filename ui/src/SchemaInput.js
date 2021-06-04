@@ -15,15 +15,20 @@ const inferSchemaAction = (jsonl) => ({
 
 function SchemaInput() {
   const [json, setJson] = useState('');
-  const { loading, payload, mutate } = useMutation(inferSchemaAction);
+  const { loading, mutate } = useMutation(inferSchemaAction);
   const dispatch = useDispatch()
 
   return (
     <div className='SchemaInput'>
       <textarea disabled={loading} value={json} onChange={e => setJson(e.target.value)} />
         <button disabled={loading} onClick={async () => {
-          await mutate(json);
-          dispatch(setSchema(payload));
+          const {error: mutationError, payload: schema} = await mutate(json);
+
+          if (mutationError) {
+            alert('Failed to infer schema');
+            console.error(mutationError);
+          }
+          dispatch(setSchema(schema));
         }}>Extract Schema</button>
     </div>
   );
