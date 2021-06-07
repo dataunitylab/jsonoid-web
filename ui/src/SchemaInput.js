@@ -28,8 +28,9 @@ function SchemaInput() {
           if (mutationError) {
             alert('Failed to infer schema');
             console.error(mutationError);
+          } else {
+            dispatch(setSchema(schema));
           }
-          dispatch(setSchema(schema));
         }}>Extract Schema</button>
     </div>
   );
