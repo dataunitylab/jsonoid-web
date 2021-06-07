@@ -5,6 +5,10 @@
   padding: 2em;
 }
 
+.SchemaInput select {
+  padding: 1em;
+}
+
 .SchemaInput div {
   padding: 0.5em;
 }
