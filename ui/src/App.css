@@ -15,3 +15,8 @@ html, body, #root, .App { height: 100% }
   vertical-align: middle;
   margin-right: 2em;
 }
+
+.App button.back {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
