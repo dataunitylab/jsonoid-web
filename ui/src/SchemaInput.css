@@ -1,14 +1,19 @@
 .SchemaInput {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
   padding: 2em;
+}
+
+.SchemaInput div {
+  padding: 0.5em;
 }
 
 .SchemaInput textarea {
   border: 1px solid #CCC;
-  flex: 1;
+  flex-grow: 1;
   margin: 1em;
+  padding: 1em;
 }
 
 .SchemaInput button {
