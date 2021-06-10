@@ -16,10 +16,11 @@ lazy val root = (project in file("."))
     name := "JSONoid Web",
     resolvers += Resolver.githubPackages("michaelmior"),
     libraryDependencies ++= Seq(
-        guice,
-        jsonoid,
+      caffeine,
+      guice,
+      jsonoid,
 
-        scalaTest % Test,
+      scalaTest % Test,
     ),
     watchSources ++= (baseDirectory.value / "public/ui" ** "*").get,
     scalacOptions ++= Seq(

@@ -9,5 +9,7 @@ GET     /                           controllers.FrontendController.index()
 + nocsrf
 POST    /api/discover-schema          controllers.DiscoveryController.discover
 
+GET    /api/check-bloom              controllers.DiscoveryController.checkBloom(path: String, value: String)
+
 # Serve static assets under public directory
 GET     /*file                      controllers.FrontendController.assetOrDefault(file)

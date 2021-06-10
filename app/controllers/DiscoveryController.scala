@@ -8,6 +8,7 @@ import scala.language.implicitConversions
 import akka.stream.scaladsl._
 import akka.util.ByteString
 import play.api._
+import play.api.cache._
 import play.api.libs.json._
 import play.api.libs.streams._
 import play.api.mvc._
@@ -16,7 +17,7 @@ import play.api.libs.{json => pjson}
 import org.{json4s => j4s}
 
 import edu.rit.cs.mmior.jsonoid.discovery.DiscoverSchema
-import edu.rit.cs.mmior.jsonoid.discovery.schemas.ObjectSchema
+import edu.rit.cs.mmior.jsonoid.discovery.schemas._
 
 // From @pamu on Stack Overflow
 // https://stackoverflow.com/a/40389901/123695
@@ -56,7 +57,8 @@ import Conversions._
 
 @Singleton
 class DiscoveryController @Inject() (
-    cc: ControllerComponents
+    cc: ControllerComponents,
+    cache: SyncCacheApi
 )(implicit ec: ExecutionContext)
     extends AbstractController(cc) {
   val ndjson: BodyParser[Seq[pjson.JsValue]] = BodyParser { req =>
@@ -68,13 +70,57 @@ class DiscoveryController @Inject() (
     Accumulator(sink).map(Right.apply)
   }
 
+  private def uuidFromSession(session: Session): String = {
+    session.get("uuid") match {
+      case Some(uuidStr) => uuidStr
+      case None          => java.util.UUID.randomUUID().toString()
+    }
+  }
+
   def discover: Action[Seq[pjson.JsValue]] = Action(ndjson) {
     request: Request[Seq[pjson.JsValue]] =>
       val jsons: Seq[j4s.JValue] = request.body.map(Conversions.toJson4s(_))
       val schema = DiscoverSchema.discover(jsons.iterator)
       val transformedSchema =
         DiscoverSchema.transformSchema(schema).asInstanceOf[ObjectSchema]
+
+      // Save transformed schema in session
+      var uuid = uuidFromSession(request.session)
+      cache.set(uuid + ":schema", transformedSchema)
+
       val finalSchema: pjson.JsValue = transformedSchema.toJsonSchema
-      Ok(finalSchema)
+      Ok(finalSchema).withSession("uuid" -> uuid)
+  }
+
+  def checkBloom(path: String, value: String): Action[AnyContent] = Action {
+    implicit request =>
+      var uuid = uuidFromSession(request.session)
+      val maybeSchema = cache.get[ObjectSchema](uuid + ":schema")
+
+      maybeSchema match {
+        case None => BadRequest(Json.obj("error" -> "Not found in cache"))
+        case Some(transformedSchema) =>
+          val matches = transformedSchema.findByPointer(path) match {
+            case Some(s: StringSchema) =>
+              Some(
+                s.properties
+                  .get[StringBloomFilterProperty]
+                  .bloomFilter
+                  .contains(value)
+              )
+            case Some(i: IntegerSchema) =>
+              Some(
+                i.properties
+                  .get[IntBloomFilterProperty]
+                  .bloomFilter
+                  .contains(value.toInt)
+              )
+            case _ => None
+          }
+          matches match {
+            case Some(didMatch) => Ok(Json.obj("matches" -> didMatch))
+            case None           => BadRequest(Json.obj("error" -> "Path not found"))
+          }
+      }
   }
 }

@@ -2,6 +2,7 @@ import {useState} from 'react';
 import produce from 'immer';
 import ReactJson from 'react-json-view';
 import {ReflexContainer, ReflexSplitter, ReflexElement} from 'react-reflex';
+import CheckBloom from './CheckBloom';
 import Histogram from './Histogram';
 
 import 'react-reflex/styles.css';
@@ -103,12 +104,22 @@ function showMeta(schema, namespace) {
     </div>;
   }
 
+  let checkBloom;
+  if (meta.type === 'string') {
+    checkBloom = <div>
+      <h2>Check containment</h2>
+      <div><em>This may produce false positives, but not false negatives.</em></div>
+      <CheckBloom namespace={namespace} />
+    </div>;
+  }
+
   return <div>
     {fieldPresence}
     {histogram}
     {stats}
     {distinct}
     {examples}
+    {checkBloom}
   </div>;
 }
 
