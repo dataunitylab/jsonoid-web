@@ -11,11 +11,10 @@ function App() {
   const dispatch = useDispatch();
 
   let schemaDisplay;
+  let backButton;
   if (schema) {
-    schemaDisplay = <>
-      <button className='back' onClick={() => dispatch(setSchema(null))}>&lt; Back</button>
-      <Schema schema={schema} />
-    </>;
+    schemaDisplay = <Schema schema={schema} />;
+    backButton = <button className='back' onClick={() => dispatch(setSchema(null))}>&lt; Back</button>;
   } else {
     schemaDisplay = <SchemaInput />;
   }
@@ -25,6 +24,7 @@ function App() {
       <header>
         <img src="/logo.png" alt="jsonoid" />
         <span>JSON schema inference</span>
+        {backButton}
       </header>
       {schemaDisplay}
     </div>

@@ -18,5 +18,6 @@ html, body, #root, .App { height: 100% }
 
 .App button.back {
   font-size: 1.5em;
-  margin-bottom: 1em;
+  margin: 1em 0;
+  width: 100%;
 }

@@ -13,7 +13,6 @@
     "react-json-view": "^1.21.3",
     "react-line-graph": "^1.0.6",
     "react-redux": "^7.2.4",
-    "react-reflex": "^4.0.1",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },

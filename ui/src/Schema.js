@@ -1,11 +1,8 @@
 import {useState} from 'react';
 import produce from 'immer';
 import ReactJson from 'react-json-view';
-import {ReflexContainer, ReflexSplitter, ReflexElement} from 'react-reflex';
 import CheckBloom from './CheckBloom';
 import Histogram from './Histogram';
-
-import 'react-reflex/styles.css';
 
 const removeProps = ['examples', 'distinctValues', 'histogram', 'stats', 'fieldPresence']
 
@@ -127,8 +124,8 @@ function Schema({schema}) {
   const [namespace, setNamespace] = useState([]);
   const displaySchema = produce(schema, stripMeta);
 
-  return <ReflexContainer orientation="vertical">
-    <ReflexElement>
+  return <div style={{width: '100%', display: 'flex', overflow: 'hidden'}}>
+    <div style={{overflow: 'scroll'}}>
       <ReactJson
         src={displaySchema}
         name={false}
@@ -136,15 +133,12 @@ function Schema({schema}) {
         displayObjectSize={false}
         displayDataTypes={false}
         onSelect={x => setNamespace(x.namespace)}/>
-    </ReflexElement>
-
-    <ReflexSplitter />
-
-    <ReflexElement style={{padding: '2em'}}>
+    </div>
+    <div style={{overflow: 'scroll', padding: '2em'}}>
       <h1>{namespace.filter((e, i) => i % 2).join('.')}</h1>
       {showMeta(schema, namespace)}
-    </ReflexElement>
-  </ReflexContainer>;
+    </div>
+  </div>;
 }
 
 export default Schema;
