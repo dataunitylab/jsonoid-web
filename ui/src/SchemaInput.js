@@ -29,7 +29,7 @@ function SchemaInput() {
 
   return (
     <div className='SchemaInput'>
-      <div>Select an example schema:</div>
+      <div>Select an example collection of documents:</div>
       <select disabled={inferLoading || exampleLoading} value={example} onChange={async (e) => {
         setExample(e.target.value);
         const {error: queryError, payload: exampleJson} = await query(e.target.value);
