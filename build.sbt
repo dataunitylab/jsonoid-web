@@ -15,6 +15,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "JSONoid Web",
     resolvers += Resolver.githubPackages("michaelmior"),
+    resolvers += "jitpack" at "https://jitpack.io",
     libraryDependencies ++= Seq(
       caffeine,
       guice,
