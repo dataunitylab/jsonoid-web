@@ -16,7 +16,11 @@ import play.api.mvc._
 import play.api.libs.{json => pjson}
 import org.{json4s => j4s}
 
-import edu.rit.cs.mmior.jsonoid.discovery.DiscoverSchema
+import edu.rit.cs.mmior.jsonoid.discovery.{
+  DiscoverSchema,
+  EquivalenceRelation,
+  EquivalenceRelations
+}
 import edu.rit.cs.mmior.jsonoid.discovery.schemas._
 
 // From @pamu on Stack Overflow
@@ -79,6 +83,8 @@ class DiscoveryController @Inject() (
 
   def discover: Action[Seq[pjson.JsValue]] = Action(ndjson) {
     request: Request[Seq[pjson.JsValue]] =>
+      implicit val er: EquivalenceRelation =
+        EquivalenceRelations.KindEquivalenceRelation
       val jsons: Seq[j4s.JValue] = request.body.map(Conversions.toJson4s(_))
       val schema = DiscoverSchema.discover(jsons.iterator)
       val transformedSchema =
