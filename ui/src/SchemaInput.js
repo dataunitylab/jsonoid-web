@@ -45,6 +45,7 @@ function SchemaInput() {
         <option value="nobel.jsonl">Nobel Prize</option>
         <option value="rickandmorty.jsonl">Rick and Morty characters</option>
         <option value="mr-robot.jsonl">Mr. Robot (TVmaze)</option>
+        <option value="coins.jsonl">Coin Registry</option>
       </select>
       <div style={{textAlign: 'center'}}>or</div>
       <div>Enter a collection of JSON documents (one per line):</div>
