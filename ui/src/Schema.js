@@ -4,7 +4,7 @@ import ReactJson from 'react-json-view';
 import CheckBloom from './CheckBloom';
 import Histogram from './Histogram';
 
-const removeProps = ['bloomFilter', 'examples', 'distinctValues', 'histogram', 'stats', 'fieldPresence']
+const removeProps = ['bloomFilter', 'examples', 'distinctValues', 'histogram', 'statistics', 'fieldPresence']
 
 function stripMeta(schema) {
   for (const prop in schema) {
@@ -37,29 +37,29 @@ function showMeta(schema, namespace) {
   }
 
   let stats;
-  if (meta.stats && meta.stats.total > 1) {
+  if (meta.statistics && meta.statistics.total > 1) {
     stats = <div>
       <h2>Statistics</h2>
       <table cellPadding={10}>
         <tr>
           <td>Mean</td>
-          <td>{meta.stats.mean}</td>
+          <td>{meta.statistics.mean}</td>
         </tr>
         <tr>
           <td>Standard deviation</td>
-          <td>{meta.stats.stdev.toFixed(2)}</td>
+          <td>{meta.statistics.stdev.toFixed(2)}</td>
         </tr>
         <tr>
           <td>Variance</td>
-          <td>{meta.stats.variance.toFixed(2)}</td>
+          <td>{meta.statistics.variance.toFixed(2)}</td>
         </tr>
         <tr>
           <td>Skewness</td>
-          <td>{meta.stats.skewness.toFixed(2)}</td>
+          <td>{meta.statistics.skewness.toFixed(2)}</td>
         </tr>
         <tr>
           <td>Kurtosis</td>
-          <td>{meta.stats.kurtosis.toFixed(2)}</td>
+          <td>{meta.statistics.kurtosis.toFixed(2)}</td>
         </tr>
       </table>
     </div>;
