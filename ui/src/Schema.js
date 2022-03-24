@@ -4,7 +4,7 @@ import ReactJson from 'react-json-view';
 import CheckBloom from './CheckBloom';
 import Histogram from './Histogram';
 
-const removeProps = ['examples', 'distinctValues', 'histogram', 'stats', 'fieldPresence']
+const removeProps = ['bloomFilter', 'examples', 'distinctValues', 'histogram', 'stats', 'fieldPresence']
 
 function stripMeta(schema) {
   for (const prop in schema) {
