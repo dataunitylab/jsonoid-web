@@ -4,7 +4,7 @@ import ReactJson from 'react-json-view';
 import CheckBloom from './CheckBloom';
 import Histogram from './Histogram';
 
-const removeProps = ['bloomFilter', 'examples', 'distinctValues', 'histogram', 'statistics', 'fieldPresence']
+const removeProps = ['bloomFilter', 'examples', 'distinctValues', 'histogram', 'statistics', 'fieldPresence', 'lengthHistogram']
 
 function stripMeta(schema) {
   for (const prop in schema) {
@@ -33,6 +33,14 @@ function showMeta(schema, namespace) {
     histogram = <div>
       <h2>Histogram</h2>
       <Histogram data={meta.histogram} />
+    </div>;
+  }
+
+  let lengthHistogram;
+  if (meta.lengthHistogram && meta.lengthHistogram.length > 1) {
+    lengthHistogram = <div>
+      <h2>Length Histogram</h2>
+      <Histogram data={meta.lengthHistogram} />
     </div>;
   }
 
@@ -113,6 +121,7 @@ function showMeta(schema, namespace) {
   return <div>
     {fieldPresence}
     {histogram}
+    {lengthHistogram}
     {stats}
     {distinct}
     {examples}
