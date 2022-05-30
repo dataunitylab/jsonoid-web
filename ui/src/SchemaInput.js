@@ -6,8 +6,8 @@ import { setSchema } from './features/schemaSlice';
 
 import './SchemaInput.css';
 
-const inferSchemaAction = (jsonl) => ({
-  headers: {'Content-Type': 'text/plain'},
+const inferSchemaAction = (jsonl, propSet) => ({
+  headers: {'Content-Type': 'text/plain', 'X-Jsonoid-Property-Set': propSet},
   method: 'POST',
   endpoint: '/api/discover-schema',
   body: jsonl,
@@ -23,6 +23,7 @@ const fetchExampleAction = (example) => ({
 function SchemaInput() {
   const [json, setJson] = useState('');
   const [example, setExample] = useState('');
+  const [propSet, setPropSet] = useState('All');
   const { loading: inferLoading, mutate } = useMutation(inferSchemaAction);
   const { loading: exampleLoading, query } = useParameterizedQuery(fetchExampleAction);
   const dispatch = useDispatch()
@@ -54,8 +55,14 @@ function SchemaInput() {
           setExample('');
           setJson(e.target.value);
         }} />
+        <div>
+          Properties to discover:
+          <input type="radio" value="Min" name="propSet" checked={propSet === 'Min'} onClick={() => setPropSet('Min')} /> Minimal
+          <input type="radio" value="Simple" name="propSet" checked={propSet === 'Simple'} onClick={() => setPropSet('Simple')} /> Simple
+          <input type="radio" value="All" name="propSet" checked={propSet === 'All'} onClick={() => setPropSet('All')} /> All
+        </div>
         <button disabled={inferLoading || exampleLoading} onClick={async () => {
-          const {error: mutationError, payload: schema} = await mutate(json);
+          const {error: mutationError, payload: schema} = await mutate(json, propSet);
 
           if (mutationError) {
             alert('Failed to infer schema');

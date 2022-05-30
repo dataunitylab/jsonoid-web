@@ -85,8 +85,15 @@ class DiscoveryController @Inject() (
     request: Request[Seq[pjson.JsValue]] =>
       implicit val er: EquivalenceRelation =
         EquivalenceRelations.KindEquivalenceRelation
+      val propSetName =
+        request.headers.get("X-Jsonoid-Property-Set").getOrElse("All")
+      val propSet = propSetName match {
+        case "Min"    => PropertySets.MinProperties
+        case "Simple" => PropertySets.SimpleProperties
+        case _        => PropertySets.AllProperties
+      }
       val jsons: Seq[j4s.JValue] = request.body.map(Conversions.toJson4s(_))
-      val schema = DiscoverSchema.discover(jsons.iterator)
+      val schema = DiscoverSchema.discover(jsons.iterator, propSet)
       val transformedSchema =
         DiscoverSchema.transformSchema(schema).asInstanceOf[ObjectSchema]
 
