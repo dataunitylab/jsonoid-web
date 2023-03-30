@@ -4,7 +4,7 @@ ThisBuild / scalaVersion      := "2.11.12"
 ThisBuild / versionScheme     := Some("early-semver")
 ThisBuild / organization      := "edu.rit.cs"
 ThisBuild / organizationName  := "Rochester Institute of Technology"
-ThisBuild / githubOwner       := "michaelmior"
+ThisBuild / githubOwner       := "dataunitylab"
 ThisBuild / githubRepository  := "jsonoid-web"
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
@@ -14,6 +14,7 @@ Compile / herokuAppName := "jsonoid"
 lazy val root = (project in file("."))
   .settings(
     name := "JSONoid Web",
+    resolvers += Resolver.githubPackages("dataunitylab"),
     resolvers += Resolver.githubPackages("michaelmior"),
     resolvers += "jitpack" at "https://jitpack.io",
     libraryDependencies ++= Seq(
@@ -54,5 +55,5 @@ enablePlugins(GitVersioning)
 enablePlugins(PlayScala)
 enablePlugins(SiteScaladocPlugin)
 
-git.remoteRepo := "git@github.com:michaelmior/jsonoid-web.git"
+git.remoteRepo := "git@github.com:dataunitylab/jsonoid-web.git"
 git.useGitDescribe := true

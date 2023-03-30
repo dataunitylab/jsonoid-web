@@ -1,7 +1,7 @@
 # JSONoid Web
 
-[![CI](https://github.com/michaelmior/jsonoid-web/actions/workflows/ci.yml/badge.svg)](https://github.com/michaelmior/jsonoid-web/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/michaelmior/jsonoid-web/branch/main/graph/badge.svg?token=uHGhS4yEOr)](https://codecov.io/gh/michaelmior/jsonoid-web)
+[![CI](https://github.com/michaelmior/jsonoid-web/actions/workflows/ci.yml/badge.svg)](https://github.com/dataunitylab/jsonoid-web/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/dataunitylab/jsonoid-web/branch/main/graph/badge.svg?token=uHGhS4yEOr)](https://codecov.io/gh/dataunitylab/jsonoid-web)
 
 Web interface for JSONoid.
 
