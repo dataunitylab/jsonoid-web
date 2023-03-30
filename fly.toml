@@ -1,0 +1,26 @@
+# fly.toml file generated for jsonoid-web on 2023-03-30T15:20:41-04:00
+
+app = "jsonoid-web"
+kill_signal = "SIGINT"
+kill_timeout = 5
+mounts = []
+primary_region = "bos"
+processes = []
+
+[[services]]
+  internal_port = 9000
+  processes = ["app"]
+  protocol = "tcp"
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443

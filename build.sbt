@@ -9,6 +9,10 @@ ThisBuild / githubRepository  := "jsonoid-web"
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
+Universal / javaOptions ++= Seq(
+  "-Dpidfile.path=/dev/null"
+)
+
 lazy val root = (project in file("."))
   .settings(
     name := "JSONoid Web",
