@@ -25,15 +25,3 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         fail_ci_if_error: true
-
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: olafurpg/setup-scala@v10
-    - name: Deploy on Heroku
-      env:
-        GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: sbt stage deployHeroku
