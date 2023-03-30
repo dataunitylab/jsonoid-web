@@ -1,4 +1,5 @@
 import Dependencies._
+import com.typesafe.sbt.packager.docker._
 
 ThisBuild / scalaVersion      := "2.11.12"
 ThisBuild / versionScheme     := Some("early-semver")
@@ -53,9 +54,19 @@ wartremoverErrors ++= Seq(
   Wart.While,
 )
 
+enablePlugins(DockerPlugin)
 enablePlugins(GitVersioning)
 enablePlugins(PlayScala)
 enablePlugins(SiteScaladocPlugin)
+
+dockerEntrypoint := Seq("/opt/docker/bin/jsonoid-web")
+dockerBaseImage := "openjdk:8-alpine"
+dockerCommands ++= Seq(
+  Cmd("USER", "root"),
+  ExecCmd("RUN", "apk", "add", "--no-cache", "bash"),
+)
+dockerExposedPorts := Seq(9000)
+
 
 git.remoteRepo := "git@github.com:dataunitylab/jsonoid-web.git"
 git.useGitDescribe := true
