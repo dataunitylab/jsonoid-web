@@ -8,7 +8,7 @@ primary_region = "bos"
 processes = []
 
 [[services]]
-  internal_port = 9000
+  internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
   [services.concurrency]
