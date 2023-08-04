@@ -1,7 +1,7 @@
 import Dependencies._
 import com.typesafe.sbt.packager.docker._
 
-ThisBuild / scalaVersion      := "2.11.12"
+ThisBuild / scalaVersion      := "2.13.11"
 ThisBuild / versionScheme     := Some("early-semver")
 ThisBuild / organization      := "edu.rit.cs"
 ThisBuild / organizationName  := "Rochester Institute of Technology"
@@ -49,7 +49,6 @@ wartremoverErrors ++= Seq(
   Wart.Recursion,
   Wart.Return,
   Wart.StringPlusAny,
-  Wart.TraversableOps,
   Wart.TryPartial,
   Wart.While,
 )

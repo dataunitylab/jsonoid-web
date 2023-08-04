@@ -16,12 +16,13 @@ import play.api.mvc._
 import play.api.libs.{json => pjson}
 import org.{json4s => j4s}
 
-import edu.rit.cs.mmior.jsonoid.discovery.{
+import edu.rit.cs.dataunitylab.jsonoid.discovery.{
   DiscoverSchema,
   EquivalenceRelation,
-  EquivalenceRelations
+  EquivalenceRelations,
+  JsonoidParams
 }
-import edu.rit.cs.mmior.jsonoid.discovery.schemas._
+import edu.rit.cs.dataunitylab.jsonoid.discovery.schemas._
 
 // From @pamu on Stack Overflow
 // https://stackoverflow.com/a/40389901/123695
@@ -33,6 +34,8 @@ object Conversions {
       case pjson.JsString(str)    => j4s.JString(str)
       case pjson.JsNull           => j4s.JNull
       case pjson.JsBoolean(value) => j4s.JBool(value)
+      case pjson.JsFalse          => j4s.JBool(false)
+      case pjson.JsTrue           => j4s.JBool(true)
       case pjson.JsNumber(value)  => j4s.JDecimal(value)
       case pjson.JsArray(items)   => j4s.JArray(items.map(toJson4s(_)).toList)
       case pjson.JsObject(items) =>
@@ -93,7 +96,8 @@ class DiscoveryController @Inject() (
         case _        => PropertySets.AllProperties
       }
       val jsons: Seq[j4s.JValue] = request.body.map(Conversions.toJson4s(_))
-      val schema = DiscoverSchema.discover(jsons.iterator, propSet)
+      val p = JsonoidParams().withPropertySet(propSet)
+      val schema = DiscoverSchema.discover(jsons.iterator)(p)
       val transformedSchema =
         DiscoverSchema.transformSchema(schema).asInstanceOf[ObjectSchema]
 
@@ -101,7 +105,7 @@ class DiscoveryController @Inject() (
       var uuid = uuidFromSession(request.session)
       cache.set(uuid + ":schema", transformedSchema)
 
-      val finalSchema: pjson.JsValue = transformedSchema.toJsonSchema
+      val finalSchema: pjson.JsValue = transformedSchema.toJsonSchema()(p)
       Ok(finalSchema).withSession("uuid" -> uuid)
   }
 
