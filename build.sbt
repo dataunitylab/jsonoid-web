@@ -3,7 +3,7 @@ import com.typesafe.sbt.packager.docker._
 
 ThisBuild / scalaVersion      := "2.13.11"
 ThisBuild / versionScheme     := Some("early-semver")
-ThisBuild / organization      := "edu.rit.cs"
+ThisBuild / organization      := "edu.rit.dataunitylab"
 ThisBuild / organizationName  := "Rochester Institute of Technology"
 ThisBuild / githubOwner       := "dataunitylab"
 ThisBuild / githubRepository  := "jsonoid-web"
