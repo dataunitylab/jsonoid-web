@@ -62,6 +62,7 @@ dist := (dist dependsOn `ui-prod-build`).value
 
 // Execute frontend prod build task prior to play stage execution.
 stage := (stage dependsOn `ui-prod-build`).value
+Docker / stage := ((Docker / stage) dependsOn `ui-prod-build`).value
 
 // Execute frontend test task prior to play test execution.
 test := ((Test / test) dependsOn `ui-test`).value
