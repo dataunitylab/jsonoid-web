@@ -17,6 +17,10 @@ jobs:
       with:
         jvm: adopt:8
         apps: sbt scala
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        cache: 'yarn'
     - name: Scalafmt
       run: sbt scalafmtCheck
     - name: Scalastyle

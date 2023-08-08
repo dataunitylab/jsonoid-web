@@ -18,6 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Coursier cache
+        uses: coursier/cache-action@v6
+      - uses: coursier/setup-action@v1
+        with:
+          jvm: adopt:8
+          apps: sbt scala
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
       - name: Build app
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
