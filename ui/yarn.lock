@@ -9971,6 +9971,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-fetching-library: ^1.7.6
+    react-github-corner: ^2.5.0
     react-json-view: ^1.21.3
     react-line-graph: ^1.0.6
     react-redux: ^7.2.4
@@ -13132,6 +13133,15 @@ __metadata:
     react: ">=16.8.4"
     react-dom: ">=16.8.4"
   checksum: db457dd879ab0d2086e7ea3f7a6d55205fc4cb557d2f4d7e2ce202f2a14f20cb4f88e602927e2bd51c410dbc11dedb15e108359b3e3f369b99c490b3deda13fb
+  languageName: node
+  linkType: hard
+
+"react-github-corner@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "react-github-corner@npm:2.5.0"
+  peerDependencies:
+    react: "*"
+  checksum: cf1bb0f165b638df880f874447999950168d11a78ee2a382007e81c74372eb3453ecf1d4f9d0c7ccc6080315e3c88b2d4062735531311d7d645387ac0a949690
   languageName: node
   linkType: hard
 

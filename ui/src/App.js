@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import GithubCorner from 'react-github-corner';
 import Schema from './Schema';
 import SchemaInput from './SchemaInput';
 import { setSchema } from './features/schemaSlice';
@@ -27,6 +28,7 @@ function App() {
         {backButton}
       </header>
       {schemaDisplay}
+      <GithubCorner href="https://github.com/dataunitylab/jsonoid-discovery" />
     </div>
   );
 }
