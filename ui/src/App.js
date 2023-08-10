@@ -24,7 +24,7 @@ function App() {
     <div className="App">
       <header>
         <img src="/logo.png" alt="jsonoid" />
-        <span>JSON schema inference</span>
+        <span>JSON schema inference - a Data Unity Lab project</span>
         {backButton}
       </header>
       {schemaDisplay}
