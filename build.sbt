@@ -59,6 +59,10 @@ enablePlugins(SiteScaladocPlugin)
 
 dockerEntrypoint := Seq("/opt/docker/bin/jsonoid-web", "-Dhttp.port=8080")
 dockerBaseImage := "azul/zulu-openjdk:11-jre"
+dockerCommands ++= Seq(
+  Cmd("USER", "root"),
+  ExecCmd("RUN", "mkdir", "-p", "/opt/docker/logs"),
+)
 dockerExposedPorts := Seq(8080)
 
 
