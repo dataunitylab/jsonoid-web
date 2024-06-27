@@ -1,9 +1,9 @@
 import Dependencies._
 import com.typesafe.sbt.packager.docker._
 
-ThisBuild / scalaVersion      := "2.13.11"
+ThisBuild / scalaVersion      := "2.13.14"
 ThisBuild / versionScheme     := Some("early-semver")
-ThisBuild / organization      := "edu.rit.dataunitylab"
+ThisBuild / organization      := "io.github.dataunitylab"
 ThisBuild / organizationName  := "Rochester Institute of Technology"
 ThisBuild / githubOwner       := "dataunitylab"
 ThisBuild / githubRepository  := "jsonoid-web"
@@ -17,7 +17,6 @@ Universal / javaOptions ++= Seq(
 lazy val root = (project in file("."))
   .settings(
     name := "JSONoid Web",
-    resolvers += Resolver.githubPackages("dataunitylab"),
     resolvers += Resolver.githubPackages("michaelmior"),
     resolvers += "jitpack" at "https://jitpack.io",
     libraryDependencies ++= Seq(
@@ -59,11 +58,7 @@ enablePlugins(PlayScala)
 enablePlugins(SiteScaladocPlugin)
 
 dockerEntrypoint := Seq("/opt/docker/bin/jsonoid-web", "-Dhttp.port=8080")
-dockerBaseImage := "openjdk:8-alpine"
-dockerCommands ++= Seq(
-  Cmd("USER", "root"),
-  ExecCmd("RUN", "apk", "add", "--no-cache", "bash"),
-)
+dockerBaseImage := "azul/zulu-openjdk:11-jre"
 dockerExposedPorts := Seq(8080)
 
 

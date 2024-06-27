@@ -16,13 +16,14 @@ import play.api.mvc._
 import play.api.libs.{json => pjson}
 import org.{json4s => j4s}
 
-import edu.rit.cs.dataunitylab.jsonoid.discovery.{
+import io.github.dataunitylab.jsonoid.discovery.{
   DiscoverSchema,
   EquivalenceRelation,
   EquivalenceRelations,
   JsonoidParams
 }
-import edu.rit.cs.dataunitylab.jsonoid.discovery.schemas._
+import io.github.dataunitylab.jsonoid.discovery.schemas._
+import io.github.dataunitylab.jsonoid.discovery.utils.JsonPointer
 
 // From @pamu on Stack Overflow
 // https://stackoverflow.com/a/40389901/123695
@@ -117,7 +118,9 @@ class DiscoveryController @Inject() (
       maybeSchema match {
         case None => BadRequest(Json.obj("error" -> "Not found in cache"))
         case Some(transformedSchema) =>
-          val matches = transformedSchema.findByPointer(path) match {
+          val matches = transformedSchema.findByPointer(
+            JsonPointer.fromString(path)
+          ) match {
             case Some(s: StringSchema) =>
               Some(
                 s.properties
